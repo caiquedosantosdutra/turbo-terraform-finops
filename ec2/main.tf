@@ -7,6 +7,18 @@ terraform {
   }
 }
 
+provider "turbonomic" {
+  hostname   = var.hostname
+  username   = var.username
+  password   = var.password
+}
+
+variable "hostname" {}
+variable "username" {}
+variable "password" {
+  sensitive = true
+}
+
 data "turbonomic_cloud_entity_recommendation" "example" { 
   entity_name  = "exampleVirtualMachine" // Name of the cloud entity (e.g., a virtual machine) to get recommendations for 
   entity_type  = "VirtualMachine" // Type of the cloud entity (e.g., VirtualMachine, Database, etc.) 
