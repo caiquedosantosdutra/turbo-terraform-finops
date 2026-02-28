@@ -22,7 +22,6 @@ variable "password" {
 data "turbonomic_cloud_entity_recommendation" "example" { 
   entity_name  = "exampleVirtualMachine" // Name of the cloud entity (e.g., a virtual machine) to get recommendations for 
   entity_type  = "VirtualMachine" // Type of the cloud entity (e.g., VirtualMachine, Database, etc.) 
-  default_size = "t3.nano" // Default instance size used if no recommendation is available. 
 }
 
 resource "aws_instance" "terraform-demo-ec2" { 
