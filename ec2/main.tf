@@ -1,5 +1,10 @@
-provider "aws" { 
-  region = "us-east-1" // Specifies the AWS region where resources will be provisioned 
+terraform {
+  required_providers {
+    turbonomic = {
+      source  = "IBM/turbonomic"
+      version = "1.7.0"  # versão disponível no registry
+    }
+  }
 }
 
 data "turbonomic_cloud_entity_recommendation" "example" { 
