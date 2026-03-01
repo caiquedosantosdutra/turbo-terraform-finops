@@ -9,15 +9,19 @@ terraform {
 
 provider "turbonomic" {
   hostname   = var.hostname
-  username   = var.username
-  password   = var.password
+  client_id     = var.client_id
+  client_secret = var.client_secret
+  role          = var.role
+
 }
 
 variable "hostname" {}
-variable "username" {}
-variable "password" {
+variable "client_id" {}
+variable "client_secret" {
   sensitive = true
 }
+variable "role" {}
+
 
 data "turbonomic_cloud_entity_recommendation" "example" { 
   entity_name  = "exampleVirtualMachine" // Name of the cloud entity (e.g., a virtual machine) to get recommendations for 
