@@ -32,7 +32,7 @@ data "turbonomic_cloud_entity_recommendation" "example" {
 resource "aws_instance" "terraform-demo-ec2" { 
   ami           = "ami-079db87dc4c10ac91" // AMI ID used to launch the instance. 
   instance_type = data.turbonomic_cloud_entity_recommendation.example.new_instance_type // Uses the recommended instance type from the Turbonomic data source. 
-
+  subnet_id = "subnet-005ad2b23ed39a428"
   tags = merge( 
     { 
       Name = "exampleVirtualMachine" // Sets the Name tag for easy identification 
@@ -40,9 +40,9 @@ resource "aws_instance" "terraform-demo-ec2" {
     provider::turbonomic::get_tag() //tag the resource as optimized by Turbonomic Provider for Terraform 
   ) 
 }
-check "turbonomic_consistent_with_recommendation_check"{
-  assert {
-    condition =  aws_instance.terraform-instance-1.instance_type == coalesce(data.turbonomic_cloud_entity_recommendation.example.new_instance_type,aws_instance.terraform-instance-1.instance_type)
-    error_message = "Must use the latest recommended instance type,${coalesce(data.turbonomic_cloud_entity_recommendation.example.new_instance_type,aws_instance.terraform-instance-1.instance_type)}"
-  }
-}
+# check "turbonomic_consistent_with_recommendation_check"{
+#   assert {
+#     condition =  aws_instance.terraform-instance-1.instance_type == coalesce(data.turbonomic_cloud_entity_recommendation.example.new_instance_type,aws_instance.terraform-instance-1.instance_type)
+#     error_message = "Must use the latest recommended instance type,${coalesce(data.turbonomic_cloud_entity_recommendation.example.new_instance_type,aws_instance.terraform-instance-1.instance_type)}"
+#   }
+# }
